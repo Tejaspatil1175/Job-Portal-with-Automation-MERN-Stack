@@ -42,25 +42,25 @@ export const postJob = catchAsyncErrors(async (req, res, next) => {
       )
     );
   }
+  const postedBy = req.user._id;
   const job = await Job.create({
-  title,
-  jobType,
-  location,
-  companyName,
-  introduction,
-  responsibilities,
-  qualifications,
-  offers: offers || "", // Default empty string if not provided
-  salary,
-  hiringMultipleCandidates: hiringMultipleCandidates || false, // Default false if not provided
-  personalWebsite: {
-    title: personalWebsiteTitle || "", // Default empty string if not provided
-    url: personalWebsiteUrl || "", // Default empty string if not provided
-  },
-  jobNiche,
-  postedBy,
-});
-
+    title,
+    jobType,
+    location,
+    companyName,
+    introduction,
+    responsibilities,
+    qualifications,
+    offers,
+    salary,
+    hiringMultipleCandidates,
+    personalWebsite: {
+      title: personalWebsiteTitle,
+      url: personalWebsiteUrl,
+    },
+    jobNiche,
+    postedBy,
+  });
   res.status(201).json({
     success: true,
     message: "Job posted successfully.",
