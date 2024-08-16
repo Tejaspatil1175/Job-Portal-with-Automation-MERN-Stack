@@ -12,74 +12,92 @@ const jobSlice = createSlice({
     myJobs: [],
   },
   reducers: {
-    requestForAllJobs(state) {
+    requestForAllJobs(state, action) {
       state.loading = true;
       state.error = null;
     },
     successForAllJobs(state, action) {
       state.loading = false;
       state.jobs = action.payload;
+      state.error = null;
     },
     failureForAllJobs(state, action) {
       state.loading = false;
       state.error = action.payload;
     },
-    requestForSingleJob(state) {
-      state.loading = true;
+    requestForSingleJob(state, action) {
+      state.message = null;
       state.error = null;
+      state.loading = true;
     },
     successForSingleJob(state, action) {
       state.loading = false;
+      state.error = null;
       state.singleJob = action.payload;
     },
     failureForSingleJob(state, action) {
-      state.loading = false;
+      state.singleJob = state.singleJob;
       state.error = action.payload;
+      state.loading = false;
     },
-    requestForPostJob(state) {
-      state.loading = true;
+    requestForPostJob(state, action) {
+      state.message = null;
       state.error = null;
+      state.loading = true;
     },
     successForPostJob(state, action) {
-      state.loading = false;
       state.message = action.payload;
+      state.error = null;
+      state.loading = false;
     },
     failureForPostJob(state, action) {
-      state.loading = false;
+      state.message = null;
       state.error = action.payload;
+      state.loading = false;
     },
-    requestForDeleteJob(state) {
+
+    requestForDeleteJob(state, action) {
       state.loading = true;
       state.error = null;
       state.message = null;
     },
     successForDeleteJob(state, action) {
       state.loading = false;
+      state.error = null;
       state.message = action.payload;
     },
     failureForDeleteJob(state, action) {
       state.loading = false;
       state.error = action.payload;
+      state.message = null;
     },
-    requestForMyJobs(state) {
+
+    requestForMyJobs(state, action) {
       state.loading = true;
+      state.myJobs = [];
       state.error = null;
     },
     successForMyJobs(state, action) {
       state.loading = false;
       state.myJobs = action.payload;
+      state.error = null;
     },
     failureForMyJobs(state, action) {
       state.loading = false;
+      state.myJobs = state.myJobs;
       state.error = action.payload;
     },
-    clearAllErrors(state) {
+
+    clearAllErrors(state, action) {
       state.error = null;
+      state.jobs = state.jobs;
     },
-    resetJobSlice(state) {
-      state.loading = false;
+    resetJobSlice(state, action) {
       state.error = null;
+      state.jobs = state.jobs;
+      state.loading = false;
       state.message = null;
+      state.myJobs = state.myJobs;
       state.singleJob = {};
     },
   },
@@ -90,66 +108,73 @@ export const fetchJobs =
   async (dispatch) => {
     try {
       dispatch(jobSlice.actions.requestForAllJobs());
-      let queryParams = new URLSearchParams();
-      if (searchKeyword) queryParams.append("searchKeyword", searchKeyword);
-      if (city) queryParams.append("city", city);
-      if (niche) queryParams.append("niche", niche);
+      let link = "http://localhost:4000/api/v1/job/getall?";
+      let queryParams = [];
+      if (searchKeyword) {
+        queryParams.push(`searchKeyword=${searchKeyword}`);
+      }
+      if (city) {
+        queryParams.push(`city=${city}`);
+      }
+      if (niche) {
+        queryParams.push(`niche=${niche}`);
+      }
 
-      const link = `http://localhost:4000/api/v1/job/getall?${queryParams.toString()}`;
+      link += queryParams.join("&");
       const response = await axios.get(link, { withCredentials: true });
       dispatch(jobSlice.actions.successForAllJobs(response.data.jobs));
-      dispatch(clearAllJobErrors());
+      dispatch(jobSlice.actions.clearAllErrors());
     } catch (error) {
       dispatch(jobSlice.actions.failureForAllJobs(error.response.data.message));
     }
   };
 
 export const fetchSingleJob = (jobId) => async (dispatch) => {
+  dispatch(jobSlice.actions.requestForSingleJob());
   try {
-    dispatch(jobSlice.actions.requestForSingleJob());
     const response = await axios.get(
       `http://localhost:4000/api/v1/job/get/${jobId}`,
       { withCredentials: true }
     );
     dispatch(jobSlice.actions.successForSingleJob(response.data.job));
-    dispatch(clearAllJobErrors());
+    dispatch(jobSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(jobSlice.actions.failureForSingleJob(error.response.data.message));
   }
 };
 
 export const postJob = (data) => async (dispatch) => {
+  dispatch(jobSlice.actions.requestForPostJob());
   try {
-    dispatch(jobSlice.actions.requestForPostJob());
     const response = await axios.post(
       `http://localhost:4000/api/v1/job/post`,
       data,
       { withCredentials: true, headers: { "Content-Type": "application/json" } }
     );
     dispatch(jobSlice.actions.successForPostJob(response.data.message));
-    dispatch(clearAllJobErrors());
+    dispatch(jobSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(jobSlice.actions.failureForPostJob(error.response.data.message));
   }
 };
 
 export const getMyJobs = () => async (dispatch) => {
+  dispatch(jobSlice.actions.requestForMyJobs());
   try {
-    dispatch(jobSlice.actions.requestForMyJobs());
     const response = await axios.get(
       `http://localhost:4000/api/v1/job/getmyjobs`,
       { withCredentials: true }
     );
     dispatch(jobSlice.actions.successForMyJobs(response.data.myJobs));
-    dispatch(clearAllJobErrors());
+    dispatch(jobSlice.actions.clearAllErrors());
   } catch (error) {
     dispatch(jobSlice.actions.failureForMyJobs(error.response.data.message));
   }
 };
 
 export const deleteJob = (id) => async (dispatch) => {
+  dispatch(jobSlice.actions.requestForDeleteJob());
   try {
-    dispatch(jobSlice.actions.requestForDeleteJob());
     const response = await axios.delete(
       `http://localhost:4000/api/v1/job/delete/${id}`,
       { withCredentials: true }
