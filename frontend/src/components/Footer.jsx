@@ -19,7 +19,7 @@ const Footer = () => {
         <div>
           <h4>Support</h4>
           <ul>
-            <li>AT POST JUNE BHAMPUR TAL SHIRPUR</li>
+            <li>At post june bhampur tal shirpur dis dhule</li>
             <li>tejaspatil@gmail.com</li>
             <li>+91 8788244416</li>
           </ul>
@@ -45,15 +45,22 @@ const Footer = () => {
           <h4>Follow Us</h4>
           <ul>
             <li>
-              <Link to={"/"}>
+              <Link to={"https://x.com/Tejasspatill?s=09"}>
                 <span>
                   <FaSquareXTwitter />
                 </span>
                 <span>Twitter (X)</span>
               </Link>
             </li>
+            <li>
+              <Link to={"https://www.instagram.com/tejaspatil_010?igsh=OWMzNGNoeWw5NWV3"}>
+                <span>
+                  <FaSquareInstagram />
+                </span>
+                <span>Instagram</span>
+              </Link>
+            </li>
            
-            
             <li>
               <Link to={"/"}>
                 <span>
@@ -66,7 +73,7 @@ const Footer = () => {
         </div>
       </footer>
       <div className="copyright">
-        &copy; CopyRight 2024. All Rights Reserved By CodeWithTejas
+        &copy; CopyRight 2024. All Rights Reserved By Tejas
       </div>
     </>
   );

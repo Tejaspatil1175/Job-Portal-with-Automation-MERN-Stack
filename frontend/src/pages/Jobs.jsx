@@ -59,8 +59,7 @@ const Jobs = () => {
     "Patna",
     "Vadodara",
     "Ghaziabad",
-  ];
-
+];
 
   const nichesArray = [
     "Software Development",
