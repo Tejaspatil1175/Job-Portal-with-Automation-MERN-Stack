@@ -20,7 +20,7 @@ const Footer = () => {
           <h4>Support</h4>
           <ul>
             <li>At post june bhampur tal shirpur dis dhule</li>
-            <li>tejaspatil@gmail.com</li>
+            <li>tejaspatil1175@gmail.com</li>
             <li>+91 8788244416</li>
           </ul>
         </div>
