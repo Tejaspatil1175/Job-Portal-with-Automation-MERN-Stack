@@ -166,7 +166,10 @@ const PostApplication = () => {
             </div>
           </>
         ) : (
-          <p>You're not logged in as a Job Seeker.</p>
+          <p style={{ color: "red", fontWeight: "bold", marginBottom: "1rem" }}>
+          It looks like you’re not logged in as a Job Seeker. To apply for jobs, please log in with your Job Seeker account.
+        </p>
+        
         )}
 
         {isAuthenticated && user.role === "Job Seeker" && (

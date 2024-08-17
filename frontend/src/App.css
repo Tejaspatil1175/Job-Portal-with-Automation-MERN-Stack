@@ -247,24 +247,30 @@ input::-webkit-outer-spin-button {
   }
 }
 
+/* General Footer Styles */
 footer {
   background: #111;
   display: flex;
   border-bottom: 1px solid rgb(133, 133, 133);
   padding: 40px 20px 20px 20px;
+  color: #fff;
 }
+
 footer div {
   flex: 1;
   padding-right: 20px;
 }
+
 footer div:first-child {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 footer div img {
   width: 200px;
 }
+
 footer div h4 {
   color: #fff;
   font-weight: 700;
@@ -272,15 +278,18 @@ footer div h4 {
   font-size: 26px;
   margin-bottom: 20px;
 }
+
 footer div ul {
   display: flex;
   flex-direction: column;
   gap: 10px;
   color: gainsboro;
 }
+
 footer div ul li {
   overflow-y: hidden;
 }
+
 footer div ul a {
   text-decoration: none;
   color: gainsboro;
@@ -289,51 +298,72 @@ footer div ul a {
   gap: 10px;
   transition: 0.3s;
 }
+
 footer div ul a:hover {
   color: #dfdf07;
   transition: 0.3s;
 }
+
 footer div ul a span {
   display: flex;
 }
-.copyright {
-  background: #111;
-  display: flex;
-  justify-content: center;
+
+/* Footer Copyright Styles */
+.footer-copyright {
+  background-color: #003366; /* Darker background color for contrast */
+  color: #ffffff; /* White text for better readability */
   text-align: center;
-  color: #8080805c;
-  font-weight: 300;
-  padding: 20px;
+  padding: 20px 0;
+  font-size: 14px;
+  border-top: 1px solid #ffffff; /* Subtle border for separation */
 }
+
+.footer-copyright p {
+  margin: 0;
+}
+
+.footer-copyright .company-name {
+  font-weight: bold;
+  font-size: 16px; /* Slightly larger font size for emphasis */
+}
+
+/* Responsive Styles */
 @media (max-width: 1112px) {
   footer {
     flex-wrap: wrap;
     padding: 40px 40px 20px 40px;
   }
+
   footer div {
     flex: none;
     width: 50%;
     margin-bottom: 30px;
   }
+
   footer div:first-child {
     justify-content: flex-start;
   }
 }
+
 @media (max-width: 606px) {
   footer div:first-child {
     justify-content: center;
   }
+
   footer div img {
     width: 270px;
   }
+
   footer {
     padding: 20px;
   }
+
   footer div {
     width: 100%;
     padding: 0;
   }
 }
+
 
 .hero {
   min-height: 800px;
