@@ -1,0 +1,57 @@
+{
+      "name": "mern-stack-jobvista-automation",
+      "version": "1.0.0",
+      "description": "MERN stack job portal with automation features",
+      "main": "backend/app.js", 
+            "scripts": {
+        "start": "node backend/app.js",
+        "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
+        "dev-backend": "nodemon backend/app.js",
+        "dev-frontend": "vite --config frontend/vite.config.js",
+        "build": "npm run build-frontend && npm run build-backend",
+        "build-frontend": "vite build --config frontend/vite.config.js",
+        "build-backend": "echo 'Backend ready'",
+        "lint": "eslint ."
+      },
+      "dependencies": {
+       
+        "ex // Backend dependenciespress": "^4.18.2",
+        "dotenv": "^16.0.3",
+        "cors": "^2.8.5",
+        "cookie-parser": "^1.4.6",
+        "express-fileupload": "^1.4.0",
+        "mongoose": "^7.0.0",
+        "jsonwebtoken": "^9.0.0",
+        
+       
+        "@reduxjs/toolkit": "^1.9.3",
+        "axios": "^1.3.4",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-icons": "^5.1.0",
+        "react-redux": "^8.0.5",
+        "react-router-dom": "^6.10.0",
+        "react-toastify": "^10.0.0"
+      },
+      "devDependencies": {
+       
+        "@eslint/js": "^8.0.0",
+        "@types/react": "^18.0.28",
+        "@types/react-dom": "^18.0.11",
+        "@vitejs/plugin-react": "^3.1.0",
+        "eslint": "^8.0.0",
+        "eslint-plugin-react": "^7.32.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "vite": "^4.0.0",
+        
+      
+        "nodemon": "^2.0.20",
+        "concurrently": "^7.0.0"  
+      },
+      "engines": {
+        "node": ">=14.0.0"
+      },
+      "author": "Teck",
+      "license": "MIT"
+    }
+    
