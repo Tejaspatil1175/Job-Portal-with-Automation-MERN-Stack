@@ -92,7 +92,7 @@ export const register = (data) => async (dispatch) => {
   dispatch(userSlice.actions.registerRequest());
   try {
     const response = await axios.post(
-      "http://localhost:4000/api/v1/user/register",
+      "https://mern-stack-jobvista-automation.onrender.com/api/v1/user/register",
       data,
       {
         withCredentials: true,
@@ -110,7 +110,7 @@ export const login = (data) => async (dispatch) => {
   dispatch(userSlice.actions.loginRequest());
   try {
     const response = await axios.post(
-      "http://localhost:4000/api/v1/user/login",
+      "https://mern-stack-jobvista-automation.onrender.com/api/v1/user/login",
       data,
       {
         withCredentials: true,
@@ -128,7 +128,7 @@ export const getUser = () => async (dispatch) => {
   dispatch(userSlice.actions.fetchUserRequest());
   try {
     const response = await axios.get(
-      "http://localhost:4000/api/v1/user/getuser",
+      "https://mern-stack-jobvista-automation.onrender.com/api/v1/user/getuser",
       {
         withCredentials: true,
       }
@@ -136,13 +136,18 @@ export const getUser = () => async (dispatch) => {
     dispatch(userSlice.actions.fetchUserSuccess(response.data.user));
     dispatch(userSlice.actions.clearAllErrors());
   } catch (error) {
-    dispatch(userSlice.actions.fetchUserFailed(error.response.data.message));
+    console.error("Failed to fetch user:", error.response?.data || error.message);
+    dispatch(userSlice.actions.fetchUserFailed(
+      error.response?.data?.message || "An error occurred"
+    ));
   }
 };
+
+
 export const logout = () => async (dispatch) => {
   try {
     const response = await axios.get(
-      "http://localhost:4000/api/v1/user/logout",
+      "https://mern-stack-jobvista-automation.onrender.com/api/v1/user/logout",
       {
         withCredentials: true,
       }
